@@ -1,8 +1,10 @@
+import UserTable from "@/features/users/components/UserTable";
+
 const UsersPage = () => {
   return (
-    <div>
-      <h1>UsersPage</h1>
-    </div>
+    <>
+      <UserTable />
+    </>
   );
 };
 
