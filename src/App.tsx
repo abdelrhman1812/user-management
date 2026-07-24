@@ -1,5 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
-import UsersPage from "./app/users/   UsersPage";
+import UsersPage from "./app/users/UsersPage";
 import AppSidebar from "./components/shared/AppSidebar";
 import TopBar from "./components/shared/TopBar";
 

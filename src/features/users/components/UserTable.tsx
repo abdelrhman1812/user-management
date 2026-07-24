@@ -2,18 +2,14 @@ import DataTable from "@/components/shared/DataTable/DataTable";
 import type { Column } from "@/components/shared/DataTable/dataTable.types";
 import DropdownTableAction from "@/components/shared/DataTable/DropdownTableAction";
 import { Switch } from "@/components/ui/switch";
-import useUser from "@/features/users/hooks/useUser";
 import type { UserDataType } from "@/features/users/types/user.types";
 import { MoreVertical, Pencil, Trash2 } from "lucide-react";
-const UserTable = () => {
-  const {
-    handleDeleteSelected,
-    setSelectedUsers,
-    selectedUsers,
-    data,
-    isPending,
-  } = useUser();
+import { useGetUsers } from "../hooks/useUsersQuery";
+import { useUserUI } from "../hooks/useUserUI";
+const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
+  const { handleDeleteSelected, setSelectedUsers, selectedUsers } = useUserUI();
 
+  const { data: users, isPending } = useGetUsers();
   const userColumns: Column<UserDataType>[] = [
     {
       key: "image",
@@ -63,7 +59,7 @@ const UserTable = () => {
             {
               label: "Edit",
               icon: <Pencil size={15} />,
-              onClick: () => console.log("Edit", user.id),
+              onClick: () => onUpdate(user.id),
             },
             {
               label: "Delete",
@@ -85,7 +81,7 @@ const UserTable = () => {
     <>
       <DataTable
         columns={userColumns}
-        data={data ?? []}
+        data={users ?? []}
         selectable
         onSelectionChange={setSelectedUsers}
         isPending={isPending}
