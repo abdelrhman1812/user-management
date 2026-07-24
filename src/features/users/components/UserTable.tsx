@@ -1,15 +1,23 @@
+import { ConfirmDialog } from "@/components/shared/DataTable/ConfirmDialog";
 import DataTable from "@/components/shared/DataTable/DataTable";
 import type { Column } from "@/components/shared/DataTable/dataTable.types";
 import DropdownTableAction from "@/components/shared/DataTable/DropdownTableAction";
 import { Switch } from "@/components/ui/switch";
 import type { UserDataType } from "@/features/users/types/user.types";
 import { MoreVertical, Pencil, Trash2 } from "lucide-react";
-import { useGetUsers } from "../hooks/useUsersQuery";
+import { useDeleteUser, useGetUsers } from "../hooks/useUsersQuery";
 import { useUserUI } from "../hooks/useUserUI";
-const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
-  const { handleDeleteSelected, setSelectedUsers, selectedUsers } = useUserUI();
 
+const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
+  const {
+    setSelectedUsers,
+    userToDelete,
+    setUserToDelete,
+    handleConfirmDelete,
+  } = useUserUI();
+  const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser();
   const { data: users, isPending } = useGetUsers();
+
   const userColumns: Column<UserDataType>[] = [
     {
       key: "image",
@@ -64,7 +72,7 @@ const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
             {
               label: "Delete",
               icon: <Trash2 size={15} />,
-              onClick: () => console.log("Delete", user.id),
+              onClick: () => setUserToDelete({ id: user.id, name: user.name }),
             },
             {
               label: "Active",
@@ -87,14 +95,16 @@ const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
         isPending={isPending}
         message="Users Table Empty"
       />
-      {selectedUsers.length > 0 && (
-        <button
-          onClick={handleDeleteSelected}
-          className="mb-4 rounded bg-destructive px-4 py-2 text-white"
-        >
-          Delete Selected
-        </button>
-      )}
+
+      {/* Confirm Dialog  */}
+      <ConfirmDialog
+        isOpen={Boolean(userToDelete)}
+        onOpenChange={(open) => !open && setUserToDelete(null)}
+        onConfirm={() => handleConfirmDelete(deleteUser)}
+        title="Delete User"
+        description={`Are you sure you want to delete ${userToDelete?.name ?? "this user"}? This action cannot be undone.`}
+        isLoading={isDeleting}
+      />
     </>
   );
 };

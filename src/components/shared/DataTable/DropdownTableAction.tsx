@@ -30,7 +30,7 @@ const DropdownTableAction = ({
   return (
     <div className="relative inline-flex">
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger>
           <button
             type="button"
             className={`

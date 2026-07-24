@@ -6,6 +6,11 @@ export const useUserUI = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
+  const [userToDelete, setUserToDelete] = useState<{
+    id: number;
+    name: string;
+  } | null>(null);
+
   const handleOpenDialog = (id: number) => {
     setSelectedUserId(id);
     setIsOpen(true);
@@ -16,9 +21,31 @@ export const useUserUI = () => {
     setSelectedUserId(null);
   };
 
-  const handleDeleteSelected = () => {
-    console.log("Deleting selected users:", selectedUsers);
+  // const handleDeleteSelected = () => {
+  //   console.log(selectedUsers);
+  // };
+
+  const handleConfirmDelete = (
+    deleteMutateFn: (
+      data: { id: number },
+      options?: {
+        onSuccess?: () => void;
+      },
+    ) => void,
+  ) => {
+    if (!userToDelete) return;
+
+    deleteMutateFn(
+      { id: userToDelete.id },
+      {
+        onSuccess: () => {
+          setUserToDelete(null);
+        },
+      },
+    );
   };
+
+  /* Delete Bulk Users */
 
   return {
     selectedUsers,
@@ -28,6 +55,8 @@ export const useUserUI = () => {
     selectedUserId,
     handleOpenDialog,
     handleCloseDialog,
-    handleDeleteSelected,
+    handleConfirmDelete,
+    userToDelete,
+    setUserToDelete,
   };
 };

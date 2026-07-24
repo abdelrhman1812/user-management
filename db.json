@@ -9,36 +9,12 @@
       "id": "1"
     },
     {
-      "image": "https://i.pravatar.cc/150?img=2",
-      "name": "Sara Mohamed",
-      "email": "sara.mohamed@example.com",
-      "role": "User",
-      "status": "Absent",
-      "id": "2"
-    },
-    {
-      "id": "3",
-      "image": "https://i.pravatar.cc/150?img=3",
-      "name": "Omar Hassan",
-      "email": "omar.hassan@example.com",
-      "role": "Manager",
-      "status": "Active"
-    },
-    {
       "id": "4",
       "image": "https://i.pravatar.cc/150?img=4",
       "name": "Mariam Ibrahim",
       "email": "mariam.ibrahim@example.com",
       "role": "User",
       "status": "Active"
-    },
-    {
-      "id": "5",
-      "image": "https://i.pravatar.cc/150?img=5",
-      "name": "Youssef Adel",
-      "email": "youssef.adel@example.com",
-      "role": "User",
-      "status": "Absent"
     },
     {
       "id": "6",
@@ -70,7 +46,7 @@
       "name": "Karim Mostafa",
       "email": "karim.mostafa@example.com",
       "role": "User",
-      "status": "Absent"
+      "status": "Inactive"
     },
     {
       "id": "10",
@@ -78,6 +54,14 @@
       "name": "Laila Hassan",
       "email": "laila.hassan@example.com",
       "role": "Manager",
+      "status": "Active"
+    },
+    {
+      "id": "11",
+      "image": "https://i.pravatar.cc/150?img=11",
+      "name": "Mostafa Mahmoud",
+      "email": "mostafa.mahmoud@example.com",
+      "role": "User",
       "status": "Active"
     }
   ],

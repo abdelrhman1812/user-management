@@ -49,7 +49,6 @@ export function DialogUpdateUser({
 
   const imageUrl = watch("image");
 
-  // Populate data when API resolves
   useEffect(() => {
     if (user) {
       reset({

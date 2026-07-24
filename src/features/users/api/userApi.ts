@@ -3,10 +3,14 @@ import apiClient from "@/services/clientApi";
 import type { UpdateUserFormValues } from "../schema/userSchema";
 import type { UserDataType } from "../types/user.types";
 
+/* Get User */
+
 export const getUsers = async (): Promise<UserDataType[]> => {
   const { data } = await apiClient.get<UserDataType[]>(endPoints.USERS);
   return data;
 };
+
+/* Get User Details */
 
 export const getUserDetails = async (
   selectedUserId: number,
@@ -18,6 +22,8 @@ export const getUserDetails = async (
   return data;
 };
 
+/* Update User */
+
 export const updateUserData = async (
   selectedUserId: number,
   updatedData: UpdateUserFormValues,
@@ -25,6 +31,18 @@ export const updateUserData = async (
   const { data } = await apiClient.put<UserDataType>(
     `${endPoints.USERS}/${selectedUserId}`,
     updatedData,
+  );
+
+  return data;
+};
+
+/* Delete User */
+
+export const deleteUser = async (
+  selectedUserId: number | string,
+): Promise<UserDataType> => {
+  const { data } = await apiClient.delete<UserDataType>(
+    `${endPoints.USERS}/${selectedUserId}`,
   );
 
   return data;

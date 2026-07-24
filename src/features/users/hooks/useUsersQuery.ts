@@ -1,7 +1,14 @@
 import { query_keys } from "@/features/users/api/queryKeys";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getUserDetails, getUsers, updateUserData } from "../api/userApi";
+import {
+  deleteUser,
+  getUserDetails,
+  getUsers,
+  updateUserData,
+} from "../api/userApi";
 import type { UpdateUserFormValues } from "../schema/userSchema";
+
+/* Get Users */
 
 export const useGetUsers = () => {
   return useQuery({
@@ -9,6 +16,8 @@ export const useGetUsers = () => {
     queryFn: getUsers,
   });
 };
+
+/* Get User Details */
 
 export const useGetUserDetails = (id: number | null) => {
   return useQuery({
@@ -18,12 +27,27 @@ export const useGetUserDetails = (id: number | null) => {
   });
 };
 
+/* Update User */
+
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({ id, data }: { id: number; data: UpdateUserFormValues }) =>
       updateUserData(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [query_keys.USERS] });
+    },
+  });
+};
+
+/* Delete single User */
+
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id }: { id: number | string }) => deleteUser(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [query_keys.USERS] });
     },
