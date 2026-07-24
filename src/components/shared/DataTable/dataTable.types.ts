@@ -9,4 +9,6 @@ export interface DataTableProps<T> {
   data: T[];
   selectable?: boolean;
   onSelectionChange?: (rows: T[]) => void;
+  isPending: boolean;
+  message?: string;
 }

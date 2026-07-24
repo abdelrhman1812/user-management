@@ -2,11 +2,17 @@ import DataTable from "@/components/shared/DataTable/DataTable";
 import type { Column } from "@/components/shared/DataTable/dataTable.types";
 import DropdownTableAction from "@/components/shared/DataTable/DropdownTableAction";
 import { Switch } from "@/components/ui/switch";
+import useUser from "@/features/users/hooks/useUser";
 import type { UserDataType } from "@/features/users/types/user.types";
-import useUser from "@/hooks/useUser";
 import { MoreVertical, Pencil, Trash2 } from "lucide-react";
 const UserTable = () => {
-  const { handleDeleteSelected, setSelectedUsers, selectedUsers } = useUser();
+  const {
+    handleDeleteSelected,
+    setSelectedUsers,
+    selectedUsers,
+    data,
+    isPending,
+  } = useUser();
 
   const userColumns: Column<UserDataType>[] = [
     {
@@ -79,9 +85,11 @@ const UserTable = () => {
     <>
       <DataTable
         columns={userColumns}
-        data={[]}
+        data={data ?? []}
         selectable
         onSelectionChange={setSelectedUsers}
+        isPending={isPending}
+        message="Users Table Empty"
       />
       {selectedUsers.length > 0 && (
         <button

@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "avatar": "https://i.pravatar.cc/150?img=1",
+      "name": "Ahmed Ali",
+      "email": "ahmed.ali@example.com",
+      "role": "Admin",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "avatar": "https://i.pravatar.cc/150?img=2",
+      "name": "Sara Mohamed",
+      "email": "sara.mohamed@example.com",
+      "role": "User",
+      "status": "Absent"
+    },
+    {
+      "id": 3,
+      "avatar": "https://i.pravatar.cc/150?img=3",
+      "name": "Omar Hassan",
+      "email": "omar.hassan@example.com",
+      "role": "Manager",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "avatar": "https://i.pravatar.cc/150?img=4",
+      "name": "Mariam Ibrahim",
+      "email": "mariam.ibrahim@example.com",
+      "role": "User",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "name": "Youssef Adel",
+      "email": "youssef.adel@example.com",
+      "role": "User",
+      "status": "Absent"
+    },
+    {
+      "id": 6,
+      "avatar": "https://i.pravatar.cc/150?img=6",
+      "name": "Nour Khaled",
+      "email": "nour.khaled@example.com",
+      "role": "Manager",
+      "status": "Active"
+    },
+    {
+      "id": 7,
+      "avatar": "https://i.pravatar.cc/150?img=7",
+      "name": "Mahmoud Samir",
+      "email": "mahmoud.samir@example.com",
+      "role": "User",
+      "status": "Active"
+    },
+    {
+      "id": 8,
+      "avatar": "https://i.pravatar.cc/150?img=8",
+      "name": "Salma Tarek",
+      "email": "salma.tarek@example.com",
+      "role": "Admin",
+      "status": "Active"
+    },
+    {
+      "id": 9,
+      "avatar": "https://i.pravatar.cc/150?img=9",
+      "name": "Karim Mostafa",
+      "email": "karim.mostafa@example.com",
+      "role": "User",
+      "status": "Absent"
+    },
+    {
+      "id": 10,
+      "avatar": "https://i.pravatar.cc/150?img=10",
+      "name": "Laila Hassan",
+      "email": "laila.hassan@example.com",
+      "role": "Manager",
+      "status": "Active"
+    }
+  ]
+}
