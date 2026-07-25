@@ -5,11 +5,21 @@ const apiClient: AxiosInstance = axios.create({
 });
 
 apiClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error: unknown) => {
-    return Promise.reject(error);
+    let errorMessage = "error";
+
+    if (axios.isAxiosError(error)) {
+      errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        error.message ||
+        errorMessage;
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    return Promise.reject(new Error(errorMessage));
   },
 );
 

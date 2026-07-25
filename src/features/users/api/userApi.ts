@@ -47,3 +47,18 @@ export const deleteUser = async (
 
   return data;
 };
+
+/* Toggle Active */
+export const toggleUserStatus = async ({
+  id,
+  status,
+}: {
+  id: number | string;
+  status: "Active" | "Deactivate";
+}): Promise<UserDataType> => {
+  const { data } = await apiClient.patch<UserDataType>(
+    `${endPoints.USERS}/${id}`,
+    { status },
+  );
+  return data;
+};

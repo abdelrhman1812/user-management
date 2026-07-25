@@ -4,6 +4,7 @@ import {
   deleteUser,
   getUserDetails,
   getUsers,
+  toggleUserStatus,
   updateUserData,
 } from "../api/userApi";
 import type { UpdateUserFormValues } from "../schema/userSchema";
@@ -48,6 +49,19 @@ export const useDeleteUser = () => {
 
   return useMutation({
     mutationFn: ({ id }: { id: number | string }) => deleteUser(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [query_keys.USERS] });
+    },
+  });
+};
+
+/* Toggle User Status */
+
+export const useToggleUserStatus = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: toggleUserStatus,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [query_keys.USERS] });
     },

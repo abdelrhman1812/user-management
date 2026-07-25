@@ -109,8 +109,7 @@ export function UserFormFields({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Active">Active</SelectItem>
-                <SelectItem value="Inactive">Inactive</SelectItem>
-                <SelectItem value="Pending">Pending</SelectItem>
+                <SelectItem value="Deactivate">Deactivate</SelectItem>
               </SelectContent>
             </Select>
           )}

@@ -11,4 +11,7 @@ export interface DataTableProps<T> {
   onSelectionChange?: (rows: T[]) => void;
   isPending: boolean;
   message?: string;
+  isError?: boolean;
+  // error?: { message: string };
+  error?: Error | null;
 }

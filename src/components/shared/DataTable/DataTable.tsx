@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { DataTableProps } from "./dataTable.types";
 import { TableEmptyState } from "./TableEmptyState";
+import { TableErrorState } from "./TableErrorState";
 import { TableSkeleton } from "./TableSkeleton";
 
 export default function DataTable<T>({
@@ -10,6 +11,8 @@ export default function DataTable<T>({
   onSelectionChange,
   isPending = false,
   message,
+  isError = false,
+  error,
 }: DataTableProps<T>) {
   const [selectedRows, setSelectedRows] = useState<T[]>([]);
 
@@ -32,8 +35,6 @@ export default function DataTable<T>({
     setSelectedRows(updatedRows);
     onSelectionChange?.(updatedRows);
   };
-
-  const totalColumns = columns.length + (selectable ? 1 : 0);
 
   return (
     <div className="w-full overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
@@ -71,8 +72,13 @@ export default function DataTable<T>({
               selectable={selectable}
               rowsCount={5}
             />
+          ) : isError ? (
+            <TableErrorState
+              columnsCount={columns.length + 1}
+              message={error?.message}
+            />
           ) : data.length === 0 ? (
-            <TableEmptyState message={message} colSpan={totalColumns} />
+            <TableEmptyState message={message} colSpan={columns.length} />
           ) : (
             data.map((item, rowIndex) => (
               <tr

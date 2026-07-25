@@ -56,7 +56,7 @@ export function DialogUpdateUser({
         name: user.name || "",
         email: user.email || "",
         role: (user.role as "Admin" | "Manager" | "User") || "User",
-        status: (user.status as "Active" | "Absent") || "Active",
+        status: (user.status as "Active" | "Deactivate") || "Active",
       });
     }
   }, [user, reset]);
@@ -68,9 +68,11 @@ export function DialogUpdateUser({
       { id: userId, data: values },
       {
         onSuccess: () => {
-          const notify = () => toast("update done");
-          notify();
+          toast.success("User updated successfully!");
           onOpenChange(false);
+        },
+        onError: (error) => {
+          toast.error(error.message);
         },
       },
     );

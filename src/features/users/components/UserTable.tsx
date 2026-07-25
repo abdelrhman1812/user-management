@@ -5,7 +5,12 @@ import DropdownTableAction from "@/components/shared/DataTable/DropdownTableActi
 import { Switch } from "@/components/ui/switch";
 import type { UserDataType } from "@/features/users/types/user.types";
 import { MoreVertical, Pencil, Trash2 } from "lucide-react";
-import { useDeleteUser, useGetUsers } from "../hooks/useUsersQuery";
+import { toast } from "react-toastify";
+import {
+  useDeleteUser,
+  useGetUsers,
+  useToggleUserStatus,
+} from "../hooks/useUsersQuery";
 import { useUserUI } from "../hooks/useUserUI";
 
 const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
@@ -16,7 +21,8 @@ const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
     handleConfirmDelete,
   } = useUserUI();
   const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser();
-  const { data: users, isPending } = useGetUsers();
+  const { data: users, isPending, isError, error } = useGetUsers();
+  const { mutate: toggleStatus, isPending: isToggling } = useToggleUserStatus();
 
   const userColumns: Column<UserDataType>[] = [
     {
@@ -77,7 +83,29 @@ const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
             {
               label: "Active",
               preventClose: true,
-              element: <Switch checked={user.status === "Active"} />,
+              element: (
+                <Switch
+                  checked={user.status === "Active"}
+                  disabled={isToggling}
+                  onCheckedChange={(checked) => {
+                    const nextStatus = checked ? "Active" : "Deactivate";
+
+                    toggleStatus(
+                      { id: user.id, status: nextStatus },
+                      {
+                        onSuccess: () => {
+                          toast.success(
+                            `User status updated to ${nextStatus === "Active" ? "Active" : "Deactivate"}`,
+                          );
+                        },
+                        onError: (error) => {
+                          toast.error(error.message);
+                        },
+                      },
+                    );
+                  }}
+                />
+              ),
             },
           ]}
         />
@@ -94,6 +122,8 @@ const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
         onSelectionChange={setSelectedUsers}
         isPending={isPending}
         message="Users Table Empty"
+        isError={isError}
+        error={error}
       />
 
       {/* Confirm Dialog  */}

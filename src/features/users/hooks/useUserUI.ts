@@ -1,5 +1,6 @@
 import type { UserDataType } from "@/features/users/types/user.types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const useUserUI = () => {
   const [selectedUsers, setSelectedUsers] = useState<UserDataType[]>([]);
@@ -30,6 +31,7 @@ export const useUserUI = () => {
       data: { id: number },
       options?: {
         onSuccess?: () => void;
+        onError?: (error: Error) => void;
       },
     ) => void,
   ) => {
@@ -39,13 +41,15 @@ export const useUserUI = () => {
       { id: userToDelete.id },
       {
         onSuccess: () => {
+          toast.success("User deleted successfully!");
           setUserToDelete(null);
+        },
+        onError: (error) => {
+          toast.error(error.message);
         },
       },
     );
   };
-
-  /* Delete Bulk Users */
 
   return {
     selectedUsers,
