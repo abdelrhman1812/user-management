@@ -88,14 +88,14 @@ const UserTable = ({ onUpdate }: { onUpdate: (id: number) => void }) => {
                   checked={user.status === "Active"}
                   disabled={isToggling}
                   onCheckedChange={(checked) => {
-                    const nextStatus = checked ? "Active" : "Deactivate";
+                    const nextStatus = checked ? "Active" : "Inactive";
 
                     toggleStatus(
                       { id: user.id, status: nextStatus },
                       {
                         onSuccess: () => {
                           toast.success(
-                            `User status updated to ${nextStatus === "Active" ? "Active" : "Deactivate"}`,
+                            `User status updated to ${nextStatus === "Active" ? "Active" : "Inactive"}`,
                           );
                         },
                         onError: (error) => {

@@ -56,7 +56,7 @@ export function DialogUpdateUser({
         name: user.name || "",
         email: user.email || "",
         role: (user.role as "Admin" | "Manager" | "User") || "User",
-        status: (user.status as "Active" | "Deactivate") || "Active",
+        status: (user.status as "Active" | "Inactive") || "Active",
       });
     }
   }, [user, reset]);

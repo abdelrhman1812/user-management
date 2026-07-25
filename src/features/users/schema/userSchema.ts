@@ -6,7 +6,7 @@ const updateUserSchema = z.object({
   role: z.enum(["Admin", "Manager", "User"], {
     message: "Please select a role",
   }),
-  status: z.enum(["Active", "Deactivate"], {
+  status: z.enum(["Active", "Inactive"], {
     message: "Please select a status",
   }),
 });

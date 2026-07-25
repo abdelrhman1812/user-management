@@ -54,7 +54,7 @@ export const toggleUserStatus = async ({
   status,
 }: {
   id: number | string;
-  status: "Active" | "Deactivate";
+  status: "Active" | "Inactive";
 }): Promise<UserDataType> => {
   const { data } = await apiClient.patch<UserDataType>(
     `${endPoints.USERS}/${id}`,
